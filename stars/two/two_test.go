@@ -1,4 +1,4 @@
-package one
+package two
 
 import (
 	"bytes"
@@ -11,9 +11,14 @@ func TestLineValue(t *testing.T) {
 		want int
 	}
 	for tn, tc := range map[string]test{
-		"zero":            {},
-		"single digit":    {"treb7uchet", 77},
-		"multiple digits": {"a1b2c3d4e5f", 15},
+		"zero":                               {},
+		"single digit":                       {"treb7uchet", 77},
+		"multiple digits":                    {"a1b2c3d4e5f", 15},
+		"mixed digits and spelled":           {"two1nine", 29},
+		"only spelled":                       {"eightwothree", 83},
+		"mixed digits, spelled, and garbage": {"abcone2threexyz", 13},
+		"teens are tricky but we're smarter": {"7pqrstsixteen", 76},
+		"overlaps are also tricky":           {"2zoneight", 28},
 	} {
 		func(t *testing.T, tc *test) {
 			t.Run(tn, func(t *testing.T) {
@@ -26,7 +31,7 @@ func TestLineValue(t *testing.T) {
 }
 
 func BenchmarkLineValue(b *testing.B) {
-	l := line("a1b2c3d4e5f")
+	l := line("2zoneight")
 	for i := 0; i < b.N; i++ {
 		_ = l.Value()
 	}
@@ -40,11 +45,14 @@ func TestFromDocument(t *testing.T) {
 	for tn, tc := range map[string]test{
 		"zero": {},
 		"example from problem": {
-			doc: `1abc2
-pqr3stu8vwx
-a1b2c3d4e5f
-treb7uchet`,
-			want: 142,
+			doc: `two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen`,
+			want: 281,
 		},
 	} {
 		func(t *testing.T, tc *test) {

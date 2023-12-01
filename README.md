@@ -32,6 +32,7 @@ Usage:
 
 Available Commands:
   one         Calculate value from a trebuchet calibration document
+  two         Calculate value from a trebuchet calibration document
 
 Flags:
   -h, --help   help for star

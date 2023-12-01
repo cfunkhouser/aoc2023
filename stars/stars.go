@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/cfunkhouser/aoc2023/stars/one"
+	"github.com/cfunkhouser/aoc2023/stars/two"
 )
 
 var starCmd = &cobra.Command{
@@ -16,6 +17,7 @@ var starCmd = &cobra.Command{
 
 func init() {
 	one.RegisterOn(starCmd)
+	two.RegisterOn(starCmd)
 }
 
 // RegisterOn the provided command.

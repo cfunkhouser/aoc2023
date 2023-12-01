@@ -32,6 +32,8 @@ func (v line) Value() int {
 	return vi
 }
 
+// FromDocument calculates the overall calibration value from a calibration
+// document containing one value per line.
 func FromDocument(r io.Reader) (value int) {
 	s := bufio.NewScanner(r)
 	for s.Scan() {
