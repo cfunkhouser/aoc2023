@@ -31,7 +31,9 @@ Usage:
   aoc2023 star [command]
 
 Available Commands:
+  four        Calculate the sum of the power of each minimal set.
   one         Calculate value from a trebuchet calibration document
+  three       Calculate the sum of the IDs of possible games for given RGB values.
   two         Calculate value from a trebuchet calibration document
 
 Flags:
