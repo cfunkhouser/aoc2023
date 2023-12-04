@@ -74,12 +74,38 @@ func (c *Cell) DebugString() string {
 	return buf.String()
 }
 
-// ValidAdjacent returns a slice of all adjacent cells which are not nil.
+// ValidAdjacent returns a deduplicated slice of all adjacent cells which are
+// not nil.
 func (c *Cell) ValidAjacent() (ret []*Cell) {
+	adj := make(map[*Cell]bool)
 	for _, ac := range c.Adjacent {
 		if ac != nil {
-			ret = append(ret, ac)
+			adj[ac] = true
 		}
+	}
+	for ac := range adj {
+		ret = append(ret, ac)
+	}
+	return
+}
+
+// GearRatio of the cell. Returns 0 if the cell does not represent a gear.
+func (c *Cell) GearRatio() (ratio int) {
+	if r, ok := c.Rune(); !ok || r != '*' {
+		return
+	}
+	adjnums := make(map[*Cell]int)
+	for _, ac := range c.ValidAjacent() {
+		if n, ok := ac.Number(); ok {
+			adjnums[ac] = n
+		}
+	}
+	if len(adjnums) != 2 {
+		return
+	}
+	ratio = 1
+	for _, n := range adjnums {
+		ratio *= n
 	}
 	return
 }
@@ -103,6 +129,19 @@ func (s *Schematic) PartNumbers() (ret []int) {
 	}
 	for _, n := range ncells {
 		ret = append(ret, n)
+	}
+	slices.SortStableFunc(ret, func(l, r int) int {
+		return l - r
+	})
+	return
+}
+
+// GearRatios for the schematic, sorted.
+func (s *Schematic) GearRatios() (ret []int) {
+	for _, c := range s.Characters {
+		if ratio := c.GearRatio(); ratio != 0 {
+			ret = append(ret, ratio)
+		}
 	}
 	slices.SortStableFunc(ret, func(l, r int) int {
 		return l - r

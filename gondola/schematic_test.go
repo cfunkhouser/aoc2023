@@ -267,3 +267,36 @@ func TestSchematicPartNumbers(t *testing.T) {
 		}(t, tn, &tc)
 	}
 }
+
+func TestSchematicGearRatios(t *testing.T) {
+	type test struct {
+		doc  string
+		want []int
+	}
+
+	for tn, tc := range map[string]test{
+		"empty": {},
+		"example from problem": {
+			`467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..`,
+			[]int{16345, 451490}, // sorted
+		},
+	} {
+		func(t *testing.T, tn string, tc *test) {
+			t.Run(tn, func(t *testing.T) {
+				got := FromDocument(bytes.NewBufferString(tc.doc)).GearRatios()
+				if diff := cmp.Diff(got, tc.want); diff != "" {
+					t.Errorf("GearRatios(): mismatch (-got,+want):\n%v", diff)
+				}
+			})
+		}(t, tn, &tc)
+	}
+}

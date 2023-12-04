@@ -8,6 +8,7 @@ import (
 	"github.com/cfunkhouser/aoc2023/stars/five"
 	"github.com/cfunkhouser/aoc2023/stars/four"
 	"github.com/cfunkhouser/aoc2023/stars/one"
+	"github.com/cfunkhouser/aoc2023/stars/six"
 	"github.com/cfunkhouser/aoc2023/stars/three"
 	"github.com/cfunkhouser/aoc2023/stars/two"
 )
@@ -24,6 +25,7 @@ func init() {
 	three.RegisterOn(starCmd)
 	four.RegisterOn(starCmd)
 	five.RegisterOn(starCmd)
+	six.RegisterOn(starCmd)
 }
 
 // RegisterOn the provided command.
