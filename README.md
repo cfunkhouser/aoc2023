@@ -31,8 +31,12 @@ Usage:
   aoc2023 star [command]
 
 Available Commands:
+  eight       Calculate the total number of scratch off cards.
+  five        Calculate the sum of part numbers in a gondola schematic.
   four        Calculate the sum of the power of each minimal set.
   one         Calculate value from a trebuchet calibration document
+  seven       Calculate the point value of a stack of scratch cards.
+  six         Calculate the sum of gear ratios from a gondola schematic.
   three       Calculate the sum of the IDs of possible games for given RGB values.
   two         Calculate value from a trebuchet calibration document
 
