@@ -5,6 +5,7 @@ package stars
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/cfunkhouser/aoc2023/stars/eight"
 	"github.com/cfunkhouser/aoc2023/stars/five"
 	"github.com/cfunkhouser/aoc2023/stars/four"
 	"github.com/cfunkhouser/aoc2023/stars/one"
@@ -28,6 +29,7 @@ func init() {
 	five.RegisterOn(starCmd)
 	six.RegisterOn(starCmd)
 	seven.RegisterOn(starCmd)
+	eight.RegisterOn(starCmd)
 }
 
 // RegisterOn the provided command.
